@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+{ 
+while read line
+do
+wise_id="$(curl -s https://www.diskdetective.org/_ouroboros_api/projects/wise/talk/subjects/"$line" | jq '.metadata.wise_id' | sed 's/\"//g')"
+echo "$line,$wise_id" >> dd_wise.txt
+done
+} < dd_target_ids.txt
